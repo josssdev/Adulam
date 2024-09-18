@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adulam - JossDev</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-image: url('bac.png')
+        }
+
+        /* Barra de navegación */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: #fff;
+            position: relative;
+        }
+
+        nav img {
+            width: 150px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
+        }
+
+        nav button {
+            padding: 10px 20px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Botón de hamburguesa para móviles */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            background-color: #000;
+            height: 2px;
+            width: 25px;
+            margin: 4px;
+            transition: all 0.3s;
+        }
+
+        /* Estilos para dispositivos móviles */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav ul {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: #fff;
+                flex-direction: column;
+                align-items: center;
+                display: none;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 15px 0;
+            }
+        }
+
+        /* Sección de noticias con scroll */
+        .news-section {
+            padding: 50px 20px;
+            background-color: #fff;
+            position: relative;
+        }
+
+        .news-section h2 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .news-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 10px;
+            scroll-behavior: smooth;
+        }
+
+        .card {
+            min-width: 300px;
+            max-width: 300px;
+            background-color: #e6e6e6;
+            padding: 20px;
+            border-radius: 15px;
+            flex-shrink: 0;
+            transition: transform 0.3s;
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Botones de navegación */
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0);
+            color: #000000;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 1.5em;
+            border-radius: 50%;
+        }
+
+        .nav-button.left {
+            left: 10px;
+        }
+
+        .nav-button.right {
+            right: 10px;
+        }
+
+        /* Sección de servicios */
+        .services {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: #fff;
+        }
+
+        .services h2 {
+            font-size: 2.5em;
+            margin-bottom: 50px;
+        }
+
+        .services .service-cards {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .service-card {
+            background-color: #40ecf6;
+            border-radius: 15px;
+            padding: 30px 20px;
+            text-align: left;
+            transition: transform 0.3s;
+        }
+
+        .service-card img {
+            width: 50px;
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .service-card p {
+            font-size: 1em;
+            margin-bottom: 20px;
+        }
+
+        .service-card button {
+            background-color: #000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+
+.card {
+  max-width: 350px;
+  background-color: #00fbff;
+  background: linear-gradient(to top right, #00ffff, rgb(58 60 84));
+  background: -webkit-linear-gradient(to top right, #00fbff, rgb(58 60 84));
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid rgb(84 90 106);
+}
+
+.small-text, .title,.desc {
+  font-weight: 600;
+}
+
+.title,.desc {
+  margin: 8px 0;
+}
+
+.small-text {
+  color: #488aec;
+  font-size: 14px;
+}
+
+.title {
+  color: #fff;
+  font-size: 26px;
+  line-height: 26px;
+}
+
+.desc {
+  color: rgb(0, 0, 0);
+  font-size: 13px;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10px;
+  padding: 6px;
+  text-decoration: none;
+}
+
+.button:first-child {
+  box-shadow: 0 4px 6px -1px #488aec31, 0 2px 4px -1px #488aec17;
+  background-color: #488aec;
+}
+
+.button:last-child {
+  box-shadow: 0 4px 6px -1px #0b162531, 0 2px 4px -1px #0e192b17;
+  background-color: #fff;
+}
+
+.icon {
+  height: 25px;
+  width: 25px;
+}
+
+.icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.icon svg:last-child {
+  fill: #000
+}
+
+.button-text {
+  display: flex;
+  flex-direction: column;
+  margin-left: 8px;
+}
+
+.button-text span:first-child {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.google span:first-child {
+  color: rgb(219 206 253);
+}
+
+.apple span:first-child {
+  color: rgb(81 87 108);
+}
+
+.google span:last-child {
+  color: #fff;
+  font-weight: 800;
+}
+
+.apple span:last-child {
+  color: #000;
+  font-weight: 800;
+}
+
+.card {
+  max-width: 250px; 
+  border-radius: 0.5rem;
+  background-color: #fff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  border: 1px solid transparent;
+}
+
+.card a {
+  text-decoration: none
+}
+
+.content {
+  padding: 1.1rem;
+}
+
+.image {
+  object-fit: cover;
+  width: 100%;
+  height: 150px;
+  background-image: url('C:Users/jossg/OneDrive/Documentos/Adulam/chequeos.png'); /* Aquí va la ruta de tu imagen */
+}
+
+.image1 {
+  object-fit: cover;
+  width: 100%;
+  height: 150px;
+  background-image: url('ruta-de-tu-imagen.jpg'); /* Aquí va la ruta de tu imagen */
+}
+
+.image2 {
+  object-fit: cover;
+  width: 100%;
+  height: 150px;
+  background-image: url('ruta-de-tu-imagen.jpg'); /* Aquí va la ruta de tu imagen */
+}
+
+.image3 {
+  object-fit: cover;
+  width: 100%;
+  height: 150px;
+  background-image: url('ruta-de-tu-imagen.jpg'); /* Aquí va la ruta de tu imagen */
+}
+
+.image4 {
+  object-fit: cover;
+  width: 100%;
+  height: 150px;
+  background-image: url('ruta-de-tu-imagen.jpg'); /* Aquí va la ruta de tu imagen */
+}
+
+.image5 {
+  object-fit: cover;
+  width: 100%;
+  height: 150px;
+  background-image: url('ruta-de-tu-imagen.jpg'); /* Aquí va la ruta de tu imagen */
+}
+
+
+.image6 {
+  object-fit: cover;
+  width: 100%;
+  height: 150px;
+  background-image: url('ruta-de-tu-imagen.jpg'); /* Aquí va la ruta de tu imagen */
+}
+
+.title {
+  color: #ffffff;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+}
+
+.desc {
+  margin-top: 0.5rem;
+  color: #000000;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.action {
+  display: inline-flex;
+  margin-top: 1rem;
+  color: #ffffff;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  align-items: center;
+  gap: 0.25rem;
+  background-color: #2563EB;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.action span {
+  transition: .3s ease;
+}
+
+.action:hover span {
+  transform: translateX(4px);
+}
+
+.adulam{
+  font-family: serif;
+}
+
+    </style>
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav>
+        <img src="icon.png" alt="AdulamLogo">
+        <ul>
+            <li><a href="#services">Servicios</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sección de noticias -->
+    <section class="news-section" id="news">
+        <h2 class="adulam">Articulos</h2>
+        <button class="nav-button left" onclick="scrollLeft()"></button>
+
+        <!-- Contenedor de las tarjetas -->
+        <div class="news-container">
+            <div class="card">
+                <div class="image"></div>
+                <div class="content">
+                    <a href="#">
+                        <span class="title">
+                            La Importancia de los Chequeos Médicos Preventivos
+                        </span>
+                    </a>
+                    <p class="desc">
+                        En Consultorio Médico Adulam, creemos firmemente en la prevención como la clave para una vida saludable. Los chequeos médicos regulares permiten detectar problemas de salud en etapas tempranas, lo que facilita el tratamiento y mejora las posibilidades de una recuperación rápida. Algunas pruebas importantes incluyen el monitoreo de la presión arterial, análisis de sangre para medir los niveles de colesterol y glucosa, y exámenes físicos completos.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+              <div class="image1"></div>
+              <div class="content">
+                  <a href="#">
+                      <span class="title">
+                        Cómo Mejorar la Salud Mental en el Día a Día
+                      </span>
+                  </a>
+                  <p class="desc">
+                    La salud mental es fundamental para el bienestar general, y en el Consultorio Médico Adulam, reconocemos su importancia. Recomendamos prácticas como la meditación, la actividad física regular y mantener conexiones sociales saludables. Si sientes ansiedad, estrés o síntomas de depresión, busca ayuda profesional para recibir apoyo emocional y psicológico.
+                  </p>
+              </div>
+          </div>
+
+          <div class="card">
+            <div class="image2"></div>
+            <div class="content">
+                <a href="#">
+                    <span class="title">
+                      Alimentación Saludable: Guía para Mantener una Dieta Balanceada
+                    </span>
+                </a>
+                <p class="desc">
+                  Mantener una dieta equilibrada es vital para la salud general. En Consultorio Médico Adulam, aconsejamos consumir una amplia variedad de frutas, verduras, proteínas magras y granos integrales. Limitar los alimentos procesados y azúcares añadidos es esencial para prevenir enfermedades como la diabetes y problemas cardíacos. Recuerda consultar con un nutricionista para obtener un plan alimenticio personalizado.
+                </p>
+            </div>
+        </div>
+
+        <div class="card">
+          <div class="image3"></div>
+          <div class="content">
+              <a href="#">
+                  <span class="title">
+                    Ejercicio Regular: Un Pilar Fundamental para la Salud
+                  </span>
+              </a>
+              <p class="desc">
+                El ejercicio regular no solo mejora la condición física, sino que también tiene un impacto positivo en la salud mental. En Consultorio Médico Adulam, promovemos actividades físicas adaptadas a cada persona, como caminar, nadar o practicar yoga. Hacer ejercicio de 30 a 45 minutos al día puede reducir el riesgo de enfermedades crónicas y mejorar la calidad de vida.              </p>
+          </div>
+      </div>
+
+      <div class="card">
+        <div class="image4"></div>
+        <div class="content">
+            <a href="#">
+                <span class="title">
+                  Cómo Fortalecer el Sistema Inmunológico
+                </span>
+            </a>
+            <p class="desc">
+              Nuestro sistema inmunológico es la primera línea de defensa contra enfermedades. Para fortalecerlo, en Consultorio Médico Adulam recomendamos una dieta rica en vitaminas y minerales, descanso adecuado y ejercicio regular. Además, evitar el tabaco y el consumo excesivo de alcohol ayuda a mantener el sistema inmunológico en óptimas condiciones.            </p>
+        </div>
+    </div>
+
+    <div class="card">
+      <div class="image5"></div>
+      <div class="content">
+          <a href="#">
+              <span class="title">
+                La Importancia de una Buena Higiene Personal              </span>
+          </a>
+          <p class="desc">
+            Una higiene personal adecuada previene infecciones y enfermedades. Lavarse las manos con frecuencia, especialmente antes de comer y después de ir al baño, es esencial para evitar la propagación de gérmenes. En Consultorio Médico Adulam, también promovemos una correcta higiene bucal y el cuidado regular de la piel para mantener la salud integral.          </p>
+      </div>
+  </div>
+
+            
+
+            
+
+            
+
+            <!-- Añadir más artículos si es necesario -->
+        </div>
+        
+        <button class="nav-button right" onclick="scrollLeft()"></button>
+    </section>
+ 
+    <!-- Sección de servicios -->
+    <section class="services" id="services">
+        <h2>Services</h2>
+        <div class="service-cards">
+            <div class="service-card">
+                <img src="med.png" alt="Pay-per-click advertising">
+                <h3>Pay-per-click advertising</h3>
+                <p>Drive targeted traffic to your website with PPC ads.</p>
+                <button>Learn more</button>
+            </div>
+            <div class="service-card">
+                <img src="social-media-icon.png" alt="Social Media Marketing">
+                <h3>Social Media Marketing</h3>
+                <p>Grow your brand's presence on social media platforms.</p>
+                <button>Learn more</button>
+            </div>
+            <div class="service-card">
+                <img src="email-marketing-icon.png" alt="Email Marketing">
+                <h3>Email Marketing</h3>
+                <p>Engage your audience with personalized email campaigns.</p>
+                <button>Learn more</button>
+            </div>
+            <div class="service-card">
+                <img src="content-creation-icon.png" alt="Content Creation">
+                <h3>Content Creation</h3>
+                <p>Create high-quality content that resonates with your audience.</p>
+                <button>Learn more</button>
+            </div>
+            <div class="service-card">
+                <img src="analytics-icon.png" alt="Analytics and Tracking">
+                <h3>Analytics and Tracking</h3>
+                <p>Measure and optimize your digital marketing efforts.</p>
+                <button>Learn more</button>
+            </div>
+        </div>
+    </section>
+
+<center><div class="card">
+  <span class="small-text">¡Descárgalo ahora!!</span>
+  <span class="title">¡Descárgalo ahora!</span>
+  <span class="desc">Descargue la aplicación Adulam para iOS y Android para obtener nuevas actualizaciones médicas.</span>
+<div class="buttons">
+  <a href="#" class="button">
+    <span class="icon"><svg width="34" height="34" viewBox="0 0 34 34" fill="" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 28.9958V4.9125C4 4.07667 4.48167 3.34 5.19 3L19.1442 16.9542L5.19 30.9083C4.48167 30.5542 4 29.8317 4 28.9958ZM23.5642 21.3742L8.32083 30.1858L20.3483 18.1583L23.5642 21.3742ZM28.31 15.2683C28.7917 15.6508 29.1458 16.2458 29.1458 16.9542C29.1458 17.6625 28.8342 18.2292 28.3383 18.6258L25.0942 20.4958L21.5525 16.9542L25.0942 13.4125L28.31 15.2683ZM8.32083 3.7225L23.5642 12.5342L20.3483 15.75L8.32083 3.7225Z" fill="white"></path>
+</svg></span>
+    <div class="button-text google">
+      <span>Proximamente</span>
+      <span>Google Play</span>
+    </div>
+  </a>
+  <a href="#" class="button">
+    <span class="icon"><svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M26.5058 27.625C25.33 29.3817 24.0833 31.0958 22.185 31.1242C20.2866 31.1667 19.6775 30.005 17.5241 30.005C15.3566 30.005 14.6908 31.0958 12.8916 31.1667C11.0358 31.2375 9.6333 29.2967 8.4433 27.5825C6.0208 24.0833 4.16497 17.6375 6.6583 13.3025C7.8908 11.1492 10.1008 9.78916 12.495 9.74666C14.3083 9.71833 16.0366 10.9792 17.1558 10.9792C18.2608 10.9792 20.3575 9.46333 22.5533 9.68999C23.4741 9.73249 26.0525 10.0583 27.71 12.495C27.5825 12.58 24.6358 14.3083 24.6641 17.8925C24.7066 22.1708 28.4183 23.6017 28.4608 23.6158C28.4183 23.715 27.8658 25.6558 26.5058 27.625ZM18.4166 4.95833C19.4508 3.78249 21.165 2.88999 22.5816 2.83333C22.7658 4.49083 22.1 6.16249 21.1083 7.35249C20.1308 8.55666 18.5158 9.49166 16.9291 9.36416C16.7166 7.73499 17.51 6.03499 18.4166 4.95833Z" fill=""></path>
+</svg></span>
+    <div class="button-text apple">
+      <span>Proximamente</span>
+      <span>App Store</span>
+    </div>
+  </a>
+</div>
+</div>
+</center>
+
+
+
+
+    <script>
+        // Funciones de scroll horizontal
+        function scrollLeft() {
+            document.querySelector('.news-container').scrollBy({
+                left: -300,
+                behavior: 'smooth'
+            });
+        }
+
+        function scrollLeft() {
+            document.querySelector('.news-container').scrollBy({
+                left: 300,
+                behavior: 'smooth'
+            });
+        }
+
+        // Toggle de menú para dispositivos móviles
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('nav ul');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Desactivar el menú móvil al cambiar el tamaño de la ventana
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                navLinks.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
