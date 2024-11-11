@@ -119,7 +119,7 @@
     </footer>
 
     <script>
-        // Data for articles and services
+        // Datos de artículos y servicios
         const articles = [
             {
                 title: 'La Importancia de los Chequeos Médicos Preventivos',
@@ -165,7 +165,7 @@
             { icon: '🏥', title: 'Manejo del dolor', description: 'Manejo del dolor con el procedimiento de infiltración articular y columna vertebral' },
         ];
 
-        // Populate articles
+        // Populate services
         const newsContainer = document.getElementById('newsContainer');
         articles.forEach((article, index) => {
             const articleCard = document.createElement('div');
@@ -181,7 +181,6 @@
             newsContainer.appendChild(articleCard);
         });
 
-        // Populate services
         const servicesContainer = document.getElementById('servicesContainer');
         services.forEach(service => {
             const serviceCard = document.createElement('div');
@@ -194,14 +193,14 @@
             servicesContainer.appendChild(serviceCard);
         });
 
-        // Mobile menu toggle
+        //  Menu 
         const menuToggle = document.getElementById('menuToggle');
         const mobileMenu = document.getElementById('mobileMenu');
         menuToggle.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
 
-        // News scroll function
+        // Scroll 
         function scrollNews(direction) {
             const container = document.getElementById('newsContainer');
             const scrollAmount = direction === 'left' ? -300 : 300;
