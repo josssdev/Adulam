@@ -6,6 +6,42 @@
     <title>Adulam - Cuidando de tu salud</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
+        .container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+         button {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            padding: 10px 20px;
+            background-color: black;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #333;
+        }
+
+        .icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        
         .scrollbar-hide::-webkit-scrollbar {
             display: none;
         }
@@ -212,6 +248,27 @@
             if (window.innerWidth > 768) {
                 mobileMenu.classList.add('hidden');
             }
+        });
+    </script>
+    
+    <div class="container">
+        <div class="icon">&#x1F50C;</div>
+        <h1>Error 404</h1>
+        <p>No se pudo conectar a internet</p>
+        <button onclick="reloadPage()">Intentar de nuevo</button>
+    </div>
+
+    <script>
+        function reloadPage() {
+            window.location.reload();
+        }
+
+        window.addEventListener('offline', function() {
+            document.body.innerHTML = document.querySelector('.container').outerHTML;
+        });
+
+        window.addEventListener('online', function() {
+            window.location.reload();
         });
     </script>
 </body>
